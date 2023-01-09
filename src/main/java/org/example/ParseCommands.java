@@ -42,7 +42,18 @@ public class ParseCommands {
                 } else {
                     deleteFile(parts[1]);
                 }
-            } else {
+            }
+            else if (parts[0].equals("cp")) {
+                if (parts.length < 2) {
+                    System.out.println("Ошибка: укажите имя файла.");
+                } else {
+                    copyFile(parts[1],parts[2]);
+                    System.out.println(parts[2]);
+                }
+
+            }
+
+            else {
                 System.out.println("Ошибка:Неверная комманда.");
             }
         }
@@ -68,6 +79,10 @@ public class ParseCommands {
     }
     private static void deleteFile(String file) {
         command = new DeleteFileCommand(file);
+        command.execute();
+    }
+    private static void copyFile(String directoryFrom, String directoryTo) {
+        command = new CopyFileCommand(directoryFrom,directoryTo);
         command.execute();
     }
 
